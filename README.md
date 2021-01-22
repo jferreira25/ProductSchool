@@ -9,25 +9,16 @@
 
 
 ## <a id="intro"></a>Introdução
-Este projeto tem a finalidade de calcular tarifas aeroportuárias e aeronáuticas. O cliente tem a necessidade de auditar as faturas dos aeroportos, possibilitando quaisquer contestações caso diferirem os valores obtidos, poupando capital.
-
 
 ## <a id="func"></a>Funcionalidades
 
 - Autenticação
-- Cadastro de Fórmulas (Formula);
+- Cadastro de pessoas ;
 	- Consulta paginada com filtros;
 	- Cadastro de fórmula;
 	- Alteração de fórmula;
 	- Validação de fórmula;
-- Cadastro de Tipos de Taxa (RateType);
-	- Consulta paginada com filtros;
-	- Cadastro de tipos de taxa;
-	- Alteração de tipos de taxa;
-- Cadastro de Operadoras (Operators);
-	- Consulta paginada com filtros;
-	- Cadastro de operadoras;
-	- Alteração de operadoras;
+
 
 
 ## <a id="prereq"></a>Pré-requisitos para o ambiente
