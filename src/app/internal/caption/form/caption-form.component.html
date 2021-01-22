@@ -1,0 +1,183 @@
+
+<div class="mat-elevation-z8">
+
+  <mat-card>
+    <mat-card-title>Prospectivos</mat-card-title>
+    <mat-card-subtitle>
+      {{ form.controls.id.value ? 'Alteração' : 'Cadastro' }}
+    </mat-card-subtitle>
+    
+    <form [formGroup]="form" novalidate (submit)="submit(form.value)">
+
+        <div class="margin-top-10">
+         
+          <div>
+              <mat-card-title></mat-card-title>
+             
+              <mat-card-content class="contentCaption" >
+                  <div style="padding-top: 40px;">
+                  <mat-accordion class="example-headers-align">
+                      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title >
+                            Dados Pessoais 
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="row">
+                          <div class="col-sm-8">
+                              <app-input  label="Nome" [control]="form.controls.name"></app-input>
+                            </div>
+                            <div class="col-sm-2">
+                              <app-date-picker label="Data Nasc." [control]="form.controls.birthDay">
+                              </app-date-picker>
+                            </div>
+                            <div class="col-sm-1 ">
+                              <mat-checkbox [formControl]="form.controls.isResponsable"
+                                [(indeterminate)]="indeterminate" [labelPosition]="labelPosition">
+                                Responsável
+                              </mat-checkbox>
+                            </div>
+                            <div class="col-sm-6">
+                              <app-input-mask  label="CPF" [control]="form.controls.cpf" mask="000.000.000-99"></app-input-mask>
+                            </div>
+                            <div class="col-sm-6">
+                              <app-input label="RG" [control]="form.controls.rg"></app-input>
+                            </div>
+                            <div class="col-sm-6">
+                              <app-input label="Nome empresa que trabalha" [control]="form.controls.companyName"></app-input>
+                            </div>
+                            <div class="col-sm-6">
+                              <app-input label="Cargo" [control]="form.controls.occupation"></app-input>
+                            </div>
+                            <div class="col-sm-8">
+                              <app-select *ngIf="kinships" label="Parentesco" valueName="name" labelName="name" [selectItems]="kinships" 
+                              [control]="form.controls.kinship" >
+                            </app-select>
+                            </div>
+                            <div [hidden]="!isKinshipOthers" class="col-sm-4 hide">
+                              <app-input label="Parentesco" [control]="form.controls.kinshipOthers"></app-input>
+                            </div>
+                        </div>
+                        
+                    <!-- #docregion action-bar -->
+                        <mat-action-row>
+                          <button mat-button class="textButtons button" (click)="nextStep()">Contato</button>
+                        </mat-action-row>
+                    <!-- #enddocregion action-bar -->
+                      </mat-expansion-panel>
+                      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                              Contato
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  <app-input label="Email" [control]="form.controls.email" [type]="email"></app-input>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-input-mask  label="Telefone" [control]="form.controls.phoneNumber" mask="(00) 0000-0000"></app-input-mask>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-input-mask  label="Celular" [control]="form.controls.phoneNumber2" mask="(00) 00000-0000"></app-input-mask>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-input-mask  label="CEP" [control]="form.controls.cep" mask="00.000-000" (focusout)="focusOutFunction()"></app-input-mask>
+                                </div>
+                                <div class="col-sm-6">
+                                  <app-input label="Rua" [control]="form.controls.address"></app-input>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-input label="Bairro" [control]="form.controls.neighborhood"></app-input>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-input label="Complemento" [control]="form.controls.addressComplement"></app-input>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-input label="Numero" [control]="form.controls.number"></app-input>
+                                </div>
+                                <div class="col-sm-2">
+                                  <app-input label="Cidade" [control]="form.controls.city"></app-input>
+                                </div>
+                                <div class="col-sm-2">
+                                  <app-input label="UF" [control]="form.controls.state"></app-input>
+                                </div>
+                          </div>
+                        <mat-action-row>
+                          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                          <button mat-button class="textButtons button" (click)="nextStep()">Prospectivo</button>
+                        </mat-action-row>
+                      </mat-expansion-panel>
+
+
+
+
+                      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                        <mat-expansion-panel-header>
+                          <mat-panel-title>
+                              Prospectivo
+                          </mat-panel-title>
+                        </mat-expansion-panel-header>
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  <app-input label="Campanha" [control]="form.controls.campaign"></app-input>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-select *ngIf="knowUss" label="Como nos conheceu?" valueName="name" labelName="name" [selectItems]="knowUss" 
+                                  [control]="form.controls.knowUs" >
+                                </app-select>
+                                </div>
+                                <div class="col-sm-3">
+                                  <label>Periodo desejado
+                                  <app-radio-button [control]="form.controls.interestedPeriod" valueName="name" labelName="Periodo" [selectItems]="period"></app-radio-button>
+                                </label>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-date-picker label="Data prospectiva" [control]="form.controls.answerDate">
+                                  </app-date-picker>
+                                </div>
+                                <div class="col-sm-2">
+                                  <app-input label="Hora prospectiva" [control]="form.controls.answerHour" type="time"></app-input>
+                                </div>
+                                <div class="col-sm-3">
+                                  <app-date-picker label="Data próx. contato" [control]="form.controls.nextAnswerDate">
+                                  </app-date-picker>
+                                </div>
+                                <div class="col-sm-2">
+                                  <app-input label="Hora próx. contato" [control]="form.controls.nextAnswerHour" type="time"></app-input>
+                                </div>
+                               
+                          </div>
+                        <mat-action-row>
+                          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                          <button mat-button class="textButtons button" (click)="nextStep()">Fim</button>
+                        </mat-action-row>
+                      </mat-expansion-panel>
+                    
+                    </mat-accordion>
+                 
+              </div>
+              </mat-card-content>
+          </div>
+        </div>
+       
+
+      <div class="row justify-content-between">
+        <div class="col-auto">
+          <button mat-flat-button type="button" (click)="back()">
+            <mat-icon>arrow_back</mat-icon>
+            &nbsp;Voltar
+          </button>
+        </div>
+        <div class="col-auto">
+          <button mat-flat-button class="button textButtons" type="submit">
+            Salvar&nbsp;
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>

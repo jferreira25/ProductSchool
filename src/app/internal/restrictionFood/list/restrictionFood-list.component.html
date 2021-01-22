@@ -1,0 +1,67 @@
+<div class="mat-elevation-z8">
+    <mat-card>
+      <mat-card-title>Consultar Restrições Alimentares</mat-card-title>
+  
+      <form [formGroup]="form" novalidate (submit)="filter()">
+  
+        <mat-card-content>
+          <div class="row margin-top-10">
+  
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <app-input label="nome" type="text" [control]="form.controls.name">
+              </app-input>
+            </div>
+  
+          </div>
+        </mat-card-content>
+  
+        <div class="row justify-content-end">
+          <div class="col-auto">
+            <button mat-raised-button type="button" (click)="clearFilter()">
+              <mat-icon>clear</mat-icon>
+              &nbsp; Limpar
+            </button>
+          </div>
+          <div class="col-auto">
+            <button mat-raised-button class="button textButtons" type="submit">
+              Consultar&nbsp;
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+        </div>
+  
+      </form>
+  
+    </mat-card>
+  </div>
+
+<div class="mat-elevation-z8 margin-top-10">
+
+    <mat-table [dataSource]="dsRestrictionFood">
+  
+      <ng-container matColumnDef="name">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-header-cell mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+        <mat-cell *matCellDef="let element" (click)="openBottomSheet(element.id)" class="click">
+          <mat-icon>more_vert</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['name','action']">
+      </mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name','action'];">
+      </mat-row>
+  
+    </mat-table>
+  
+    <mat-paginator [length]="10" [pageSize]="10"
+      [pageSizeOptions]="[10, 25, 100, 200]" (page)="pageChangeEvent($event)"></mat-paginator>
+  </div>
+  
+  <button mat-fab  class="fab-float button" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>

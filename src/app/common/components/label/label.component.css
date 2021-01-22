@@ -1,0 +1,15 @@
+.mini-title {
+  color: rgba(0, 0, 0, 0.54);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px !important;
+  font-weight: 500;
+}
+
+.result {
+  margin: -15px 0px 40px 0px;
+  font-size: 18px;
+}
+
+.icon-result {
+  vertical-align: sub;
+}

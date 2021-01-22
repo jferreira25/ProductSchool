@@ -1,0 +1,13 @@
+<div class="width-100 text-center">
+  <p>{{ label }}</p>
+  <mat-radio-group [formControl]="control">
+    <mat-radio-button *ngFor="let selectItem of selectItems" [value]="selectItem[valueName]">
+      {{ selectItem[valueName] }}
+    </mat-radio-button>
+  </mat-radio-group>
+  <mat-error *ngIf="control.invalid && control.touched">
+    <div *ngFor="let error of getErrors()">
+      {{ error }}
+    </div>
+  </mat-error>
+</div>

@@ -1,0 +1,28 @@
+.button{
+    background-color: #306a3e;
+}
+
+.textButtons{
+    color: white;
+}
+
+.contentCaption{
+    background-color: #ebebeb;
+    margin: 5px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* .mat-accordion .mat-expansion-panel:last-of-type {
+    margin-top: 10px;
+} */
+.mat-accordion .mat-expansion-panel:not(.mat-expanded), .mat-accordion .mat-expansion-panel:not(.mat-expansion-panel-spacing) {
+   
+    margin-top: 10px;
+}
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    background-color: #306a3e;
+  }

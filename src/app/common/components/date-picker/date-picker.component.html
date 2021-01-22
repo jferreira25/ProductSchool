@@ -1,0 +1,16 @@
+<div class="width-100">
+  <mat-form-field appearance="outline" class="width-100">
+    <mat-label>&nbsp;{{ label }}</mat-label>
+    <input matInput [formControl]="control" autocomplete="false" [matDatepicker]="picker" (click)="picker.open()"/>
+    <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+    <button mat-button matSuffix mat-icon-button aria-label="Limpar" (click)="clearControl()" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
+    <mat-error *ngIf="control.invalid">
+      <div *ngFor="let error of getErrors()">
+        {{ error }}
+      </div>
+    </mat-error>
+  </mat-form-field>
+</div>

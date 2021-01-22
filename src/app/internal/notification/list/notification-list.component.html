@@ -1,0 +1,100 @@
+<div class="mat-elevation-z8">
+  <mat-card>
+    <mat-card-title>Consultar notificações</mat-card-title>
+
+    <form [formGroup]="form" novalidate (submit)="filter()">
+
+      <mat-card-content>
+        <div class="row margin-top-10">
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <app-input label="Título" type="text" [control]="form.controls.title">
+            </app-input>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-8">
+            <app-input label="Descrição" type="text" [control]="form.controls.description">
+            </app-input>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <app-select *ngIf="isVisualizedOptions" label="Visualizadas?" valueName="value" labelName="label"
+              [selectItems]="isVisualizedOptions" [control]="form.controls.isVisualized">
+            </app-select>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <app-date-picker label="Data de referência (de)" [control]="form.controls.referenceDateStart">
+            </app-date-picker>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4">
+            <app-date-picker label="Data de referência (até)" [control]="form.controls.referenceDateEnd">
+            </app-date-picker>
+          </div>
+
+        </div>
+      </mat-card-content>
+
+      <div class="row justify-content-end">
+        <div class="col-auto">
+          <button mat-raised-button type="button" (click)="clearFilter()">
+            <mat-icon>clear</mat-icon>
+            &nbsp; Limpar
+          </button>
+        </div>
+        <div class="col-auto">
+          <button mat-raised-button color="primary" type="submit">
+            Consultar&nbsp;
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>
+
+
+<div class="mat-elevation-z8 margin-top-10">
+
+  <mat-table [dataSource]="dsNotifications">
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.title }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Descrição </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.description }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="referenceDate">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Data de Referência <mat-icon class="icon-date-desc">arrow_downward</mat-icon></mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.referenceDate | date: 'dd/MM/yyyy' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isVisualized">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Já foi visualizada? </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{ element.isVisualized ? 'Sim' : 'Não' }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell mat-header-cell *matHeaderCellDef> Opções </mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="openBottomSheet(element)" class="click">
+        <mat-icon>more_vert</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['title','description','referenceDate','isVisualized','action']">
+    </mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['title','description','referenceDate','isVisualized','action'];">
+    </mat-row>
+
+  </mat-table>
+
+  <mat-paginator [length]="notificationPaginated?.total" [pageSize]="form.controls.pageLength"
+    [pageSizeOptions]="[10, 25, 100, 200]" (page)="pageChangeEvent($event)"></mat-paginator>
+</div>

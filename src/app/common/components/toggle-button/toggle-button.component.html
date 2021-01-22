@@ -1,0 +1,9 @@
+<div class="width-100 text-center">
+  <p>{{ label }}</p>
+  <mat-slide-toggle [formControl]="control">{{ option }}</mat-slide-toggle>
+  <mat-error *ngIf="control.invalid && control.touched">
+    <div *ngFor="let error of getErrors()">
+      {{ error }}
+    </div>
+  </mat-error>
+</div>

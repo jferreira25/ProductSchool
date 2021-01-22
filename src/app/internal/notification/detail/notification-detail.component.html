@@ -1,0 +1,79 @@
+<div class="mat-elevation-z8">
+
+  <mat-card>
+
+    <mat-card-title>
+      Notificação
+    </mat-card-title>
+    <mat-card-subtitle>
+      Detalhes da notificação
+    </mat-card-subtitle>
+
+    <mat-card-content>
+
+      <div class="row margin-top-20">
+
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <app-label label="Título" value="{{ notification.title }}">
+          </app-label>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <app-label label="Descrição" value="{{ notification.description }}">
+          </app-label>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <app-label label="Data de importação"
+            value="{{ notification.insertedDate | date: 'dd/MM/yyyy \'às\' HH:mm' }}">
+          </app-label>
+        </div>
+
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <app-label label="Data de referência" value="{{ notification.referenceDate | date: 'dd/MM/yyyy' }}">
+          </app-label>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="notification.detail">
+
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Detalhes da notificação
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-action-list>
+
+                <mat-list-item *ngFor="let detail of notification.detail" (click)="goToAdd(detail.id)"
+                  matTooltip="Clique para alterar o registro" matTooltipPosition="before" [matTooltipDisabled]="!detail.id">
+                  <mat-icon matListIcon>chevron_right</mat-icon>
+                  <h4 mat-line class="hover-link">{{detail.description}}</h4>
+                </mat-list-item>
+
+              </mat-action-list>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="!notification.detail">
+          <app-label label="Detalhes" value="Nada informado">
+          </app-label>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+
+    <div class="row justify-content-between">
+      <div class="col-auto">
+        <button mat-flat-button type="button" (click)="back()">
+          <mat-icon>arrow_back</mat-icon>
+          &nbsp;Voltar
+        </button>
+      </div>
+    </div>
+
+  </mat-card>
+</div>

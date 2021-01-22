@@ -1,0 +1,13 @@
+<div class="width-100">
+    <mat-form-field appearance="outline" class="width-100">
+      <mat-label>&nbsp;{{ label }}</mat-label>
+     
+      <input matInput [type]="type" [formControl]="control" [mask]="mask" />
+      <mat-error *ngIf="control.invalid">
+        <div *ngFor="let error of getErrors()">
+          {{ error }}
+        </div>
+      </mat-error>
+    </mat-form-field>
+  </div>
+  

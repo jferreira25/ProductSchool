@@ -1,0 +1,38 @@
+.image-background {
+  background-image: url(../../../../assets/images/login.jpg);
+  min-height: 380px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  opacity: 0.5;
+}
+
+.display-box {
+  display: -webkit-box;
+}
+
+.no-padding {
+  padding-right: 0px !important;
+  padding-left: 0px !important;
+}
+
+.simple-card {
+  padding: 30% 10% 0% 10%;
+  height: 100%;
+}
+
+.logo {
+  max-width: 100%;
+  min-width: 30%;
+}
+
+.btn-login {
+  width: 50%;
+  float: right;
+  background-color: #306a3e;
+}
+
+.padding-top {
+  padding-top: 10%;
+}

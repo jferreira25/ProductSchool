@@ -1,0 +1,32 @@
+<button class="notification" mat-icon-button aria-label="Notificações" [matMenuTriggerFor]="notificationsMenu">
+  <mat-icon *ngIf="!notifications.length">notifications</mat-icon>
+  <mat-icon *ngIf="notifications.length" [matBadge]="notifications.length" matBadgeColor="warn">notifications</mat-icon>
+</button>
+
+<mat-menu #notificationsMenu="matMenu">
+
+  <mat-action-list *ngIf="notifications.length">
+    <h3 mat-subheader (click)="goToNotificationList()" class="click">
+      <span class="underline">Notificações</span>
+      <mat-icon class="icon-open-notification">open_in_new</mat-icon>
+    </h3>
+    <mat-list-item *ngFor="let notification of notifications" (click)="goToNotificationDetail(notification.id)"
+      class="click">
+      <mat-icon matListIcon>open_in_new</mat-icon>
+      <h4 mat-line>{{ notification.description }}</h4>
+      <p mat-line>{{ notification.title }}</p>
+    </mat-list-item>
+  </mat-action-list>
+
+  <mat-list *ngIf="!notifications.length">
+    <h3 mat-subheader (click)="goToNotificationList()" class="click">
+      <span class="underline">Notificações</span>
+      <mat-icon class="icon-open-notification">open_in_new</mat-icon>
+    </h3>
+    <mat-list-item>
+      <mat-icon matListIcon>check</mat-icon>
+      <h4 mat-line>Não há novas notificações</h4>
+    </mat-list-item>
+  </mat-list>
+  
+</mat-menu>

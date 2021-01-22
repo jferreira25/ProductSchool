@@ -1,0 +1,44 @@
+<mat-list>
+
+  <div class="text-center">
+    <img class="logo" src="assets/images/jac-logo.png">
+    <br />
+  </div>
+
+  <div class="mini-title-wrap">
+    <h3 class="mini-title"></h3>
+  </div>
+
+  <mat-divider></mat-divider>
+  <ng-container *ngFor="let menu of menus">
+
+    <mat-list-item (click)="goToOrExpandChildren(menu)" *ngIf="canShowMenu(menu)"
+      [class.menu-active]="isRouteActive(menu, null)" class="click">
+      <mat-icon matListIcon>
+        {{ menu.icon }}
+      </mat-icon>
+      <h4 matLine>
+        {{ menu.label }}
+      </h4>
+      <mat-icon *ngIf="menu.children">
+        {{ menu.childrenOpened ? 'arrow_drop_down' : 'arrow_right' }}
+      </mat-icon>
+    </mat-list-item>
+
+    <ng-container *ngFor="let submenu of menu.children">
+      <mat-divider *ngIf="canShowMenu(submenu) && menu.childrenOpened"></mat-divider>
+      <mat-list-item *ngIf="canShowMenu(submenu) && menu.childrenOpened" [@inOutAnimation] class="submenu"
+        [class.menu-active]="isRouteActive(submenu, menu)" (click)="goToOrExpandChildren(submenu)">
+        <mat-icon matListIcon> 
+          {{ submenu.icon }}
+        </mat-icon>
+        <h4 matLine>
+          {{ submenu.label }}
+        </h4>
+      </mat-list-item>
+    </ng-container>
+
+    <mat-divider></mat-divider>
+  </ng-container>
+
+</mat-list>

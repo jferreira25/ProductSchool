@@ -1,0 +1,24 @@
+.submenu {
+  padding-left: 40px !important;
+  cursor: pointer;
+}
+
+.menu-active {
+  background-color: rgba(2, 108, 182, 0.2) !important;
+}
+
+.logo {
+  width: 50%;
+}
+
+.mini-title-wrap {
+  padding: 10px 0px 20px 0px;
+}
+
+.mini-title {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.54);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px !important;
+  font-weight: 500;
+}

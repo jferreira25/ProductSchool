@@ -1,0 +1,26 @@
+<mat-toolbar class="mat-elevation-z5 toolbarcolor">
+  <mat-icon (click)="drawer.toggle();" class="click menu ">menu</mat-icon>&nbsp;
+  <span class="hide-mobile">
+    
+  </span>
+
+  <span class="fill-remaining-space"></span>
+
+  <div>
+    <app-notification-bar></app-notification-bar>
+  </div>
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="menu" class="menu">
+      {{ loginData?.username }}
+      <mat-icon class="arrow_drop_down">arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        Sair
+      </button>
+    </mat-menu>
+  </div>
+  
+</mat-toolbar>

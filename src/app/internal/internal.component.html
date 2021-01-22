@@ -1,0 +1,25 @@
+<div id="content" class="height-100">
+  <mat-drawer-container [hasBackdrop]="true" class="height-100">
+    <mat-drawer #drawer [mode]="'over'">
+      <mat-toolbar class = "menuDrawer">
+        <mat-toolbar-row class = "menuDrawerText">
+          <span>Menu</span>
+          <span class="fill-remaining-space"></span>
+          <mat-icon (click)="drawer.toggle();" class="click">close</mat-icon>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+      <app-sidemenu  [drawer]="drawer"></app-sidemenu>
+
+    </mat-drawer>
+    <mat-drawer-content>
+
+      <app-toolbar [drawer]="drawer"></app-toolbar>
+
+      <div class="margin-8">
+        <router-outlet></router-outlet>
+      </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

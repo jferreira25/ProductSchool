@@ -1,0 +1,54 @@
+.button{
+    background-color: #306a3e;
+}
+
+.textButtons{
+    color: white;
+}
+
+.iconsForm{
+    margin:auto;
+    
+}
+.contentGuardian,.contentStudents{
+    background-color: #ebebeb;
+    margin: 5px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.margin30{
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    margin-left: 12px;
+    border: 1px solid #ccc;
+    display: inline-flex;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.file-name-upload{
+    margin-top: auto;
+    margin-left: 5px;
+}
+
+.chip-list {
+    width: 100%;
+  }
+
+  .mat-chip.mat-standard-chip{
+    background-color: #306a3e;
+    color: white;
+  }
+  .mat-chip.mat-standard-chip .mat-chip-remove{
+      color: white;
+  }
+  .mat-accordion .mat-expansion-panel:last-of-type {
+    margin-top: 10px;
+}

@@ -1,0 +1,240 @@
+<div class="mat-elevation-z8">
+
+    <mat-card>
+  
+      <mat-card-title>Guia</mat-card-title>
+      <mat-card-subtitle>
+        {{ form.controls.id.value ? 'Alteração' : 'Cadastro' }}
+      </mat-card-subtitle>
+      
+      <form [formGroup]="form" novalidate (submit)="submit(form.value)">
+         <div class="col-auto">
+            <button mat-flat-button class="button textButtons" type="button" (click)="addGuardians()">
+              Novo responsável&nbsp;
+              <mat-icon>add</mat-icon>
+            </button>
+          </div> 
+
+          <div class="margin-top-10">
+           
+            <div formArrayName="guardian" *ngFor="let af of formGuardian(form); let i = index">
+                <mat-card-title>Responsável {{i+1}}</mat-card-title>
+                <div style="float: right;"> <button mat-flat-button style="margin-right: 5px;"color="warn" type="button" (click)="removeGuardians(i)">
+                    <mat-icon>clear</mat-icon>
+                  </button></div>
+                
+                <mat-card-content class="contentGuardian" >
+                    <div style="padding-top: 40px;">
+                    <mat-accordion class="example-headers-align">
+                        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Dados Pessoais 
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <div class="row">
+                            <div class="col-sm-8">
+                                <app-input  label="Nome" [control]="af.controls.name"></app-input>
+                              </div>
+                              <div class="col-sm-2">
+                                <app-date-picker label="Data Nasc." [control]="af.controls.birthDay">
+                                </app-date-picker>
+                              </div>
+                              <div class="col-sm-1 ">
+                                <mat-checkbox [formControl]="af.controls.isResponsable"
+                                  [(indeterminate)]="indeterminate" [labelPosition]="labelPosition">
+                                  Responsável
+                                </mat-checkbox>
+                              </div>
+                              <div class="col-sm-6">
+                                <app-input-mask  label="CPF" [control]="af.controls.cpf" mask="000.000.000-99"></app-input-mask>
+                              </div>
+                              <div class="col-sm-6">
+                                <app-input label="RG" [control]="af.controls.rg"></app-input>
+                              </div>
+                              <div class="col-sm-6">
+                                <app-input label="Nome empresa que trabalha" [control]="af.controls.companyName"></app-input>
+                              </div>
+                              <div class="col-sm-6">
+                                <app-input label="Cargo" [control]="af.controls.occupation"></app-input>
+                              </div>
+                              <div class="col-sm-8">
+                                <app-select *ngIf="kinships" label="Parentesco" valueName="name" labelName="name" [selectItems]="kinships" 
+                                [control]="af.controls.kinship" >
+                              </app-select>
+                              </div>
+                              <div [hidden]="!isKinshipOthers" class="col-sm-4 hide">
+                                <app-input label="Parentesco" [control]="af.controls.kinshipOthers"></app-input>
+                              </div>
+                          </div>
+                          
+                      <!-- #docregion action-bar -->
+                          <mat-action-row>
+                            <button mat-button class="textButtons button" (click)="nextStep()">Contato</button>
+                          </mat-action-row>
+                      <!-- #enddocregion action-bar -->
+                        </mat-expansion-panel>
+                        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Contato
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <app-input label="Email" [control]="af.controls.email" [type]="email"></app-input>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <app-input-mask  label="Telefone" [control]="af.controls.phoneNumber" mask="(00) 0000-0000"></app-input-mask>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <app-input-mask  label="Celular" [control]="af.controls.phoneNumber2" mask="(00) 00000-0000"></app-input-mask>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <app-input-mask  label="CEP" [control]="af.controls.cep" mask="00.000-000" (focusout)="focusOutFunction(i)"></app-input-mask>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <app-input label="Rua" [control]="af.controls.address"></app-input>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <app-input label="Bairro" [control]="af.controls.neighborhood"></app-input>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <app-input label="Complemento" [control]="af.controls.addressComplement"></app-input>
+                                  </div>
+                                  <div class="col-sm-3">
+                                    <app-input label="Numero" [control]="af.controls.number"></app-input>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <app-input label="Cidade" [control]="af.controls.city"></app-input>
+                                  </div>
+                                  <div class="col-sm-2">
+                                    <app-input label="UF" [control]="af.controls.state"></app-input>
+                                  </div>
+                            </div>
+                          <mat-action-row>
+                            <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                            <button mat-button class="textButtons button" (click)="nextStep()">Fim</button>
+                          </mat-action-row>
+                        </mat-expansion-panel>
+                      
+                      </mat-accordion>
+                   
+                </div>
+                </mat-card-content>
+            </div>
+          </div>
+
+          <div class="col-auto margin-top-10">
+            <button mat-flat-button class="button textButtons" type="button" (click)="addStudents()">
+              Novo matriculado&nbsp;
+              <mat-icon>add</mat-icon>
+            </button>
+          </div> 
+
+          <div class="margin-top-10">
+            <div formArrayName="students" *ngFor="let af of formStudents(form); let i = index">
+                <mat-card-title>Matricula {{i+1}}</mat-card-title>
+                <div style="float: right;"> <button mat-flat-button style="margin-right: 5px;"color="warn" type="button" (click)="removeStudents(i)">
+                    <mat-icon>clear</mat-icon>
+                  </button></div>
+                 
+                <mat-card-content class="contentStudents" >
+                    <div class="row">
+                        <div class="col-sm-2">
+                                <div class="image-preview mb-3" *ngIf="previewUrl[i]">
+                                    <img [src]="previewUrl[i]" height="100" width="100"/>                 
+                                </div>
+                                <div class="image-preview mb-3" *ngIf="!previewUrl[i]">
+                                    <div style="background-color: #b9b9b9;height: 100px;width:100px"></div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                   
+                                    <label [for]="i+'file-upload'" class="custom-file-upload">
+                                        <mat-icon>cloud_upload</mat-icon> <div class="file-name-upload">Foto</div> 
+                                    </label>
+                                    <input [id]="i+'file-upload'" type="file" (change)="fileProgress($event,i)"/>
+                                </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-input label="Nome" [control]="af.controls.name"></app-input>
+                            <app-input-mask  label="CPF" [control]="af.controls.cpf" mask="000.000.000-99"></app-input-mask>
+                        </div>
+                        <div class="col-sm-4">
+                            <app-date-picker  label="Data Nasc." [control]="af.controls.birthDay">
+                            </app-date-picker>
+                            <app-input label="RG" [control]="af.controls.rg"></app-input>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <app-select *ngIf="bloodTypes" label="Tipo sanguíneo" valueName="type" labelName="type" [selectItems]="bloodTypes" 
+                            [control]="af.controls.bloodyType" >
+                          </app-select>
+                        </div>
+                        <div class="col-sm-4">
+                            <mat-form-field class="chip-list ">
+                                <mat-chip-list #chipList aria-label="Allergy selection">
+                                  <mat-chip *ngFor="let allergy of af.controls.allergiesSelecteds.value" [selectable]="selectable" [removable]="removable"
+                                    (removed)="remove(allergy,i)">
+                                    {{allergy}}
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                  </mat-chip>
+                                  <input placeholder="Alergias" #allergyInput [formControl]="allergiesCtrl" [matAutocomplete]="auto"
+                                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                                </mat-chip-list>
+              
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event,i)">
+                                  <mat-option *ngFor="let allergy of filteredAllergies | async" [value]="allergy">
+                                    {{allergy}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-4">
+                          <mat-form-field class="chip-list ">
+                              <mat-chip-list #chipList aria-label="restrictionFood selection">
+                                <mat-chip *ngFor="let restrictfood of af.controls.restrictionFoodSelecteds.value" [selectable]="selectable" [removable]="removable"
+                                  (removed)="removeRestrictionfood(restrictfood,i)">
+                                  {{restrictfood}}
+                                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Restrições Alimentares" #restrictFoodInput [formControl]="restrictfoodsCtrl" [matAutocomplete]="auto1"
+                                  [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                              </mat-chip-list>
+            
+                              <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="selectedRestrictionfood($event,i)">
+                                <mat-option *ngFor="let restrictfood of filteredRestrictionFoods | async" [value]="restrictfood">
+                                  {{restrictfood}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                      </div>
+                    </div>
+                </mat-card-content>
+            </div>
+          </div>
+
+        <div class="row justify-content-between">
+          <div class="col-auto">
+            <button mat-flat-button type="button" (click)="back()">
+              <mat-icon>arrow_back</mat-icon>
+              &nbsp;Voltar
+            </button>
+          </div>
+          <div class="col-auto">
+            <button mat-flat-button class="button textButtons" type="submit">
+              Salvar&nbsp;
+              <mat-icon>save</mat-icon>
+            </button>
+          </div>
+        </div>
+  
+      </form>
+  
+    </mat-card>
+  </div>
+  

@@ -1,0 +1,42 @@
+<div class="mat-elevation-z8">
+
+    <mat-card>
+  
+      <mat-card-title>Restrição Alimentar</mat-card-title>
+      <mat-card-subtitle>
+        {{ form.controls.id.value ? 'Alteração de restrições' : 'Cadastro de restrições' }}
+      </mat-card-subtitle>
+  
+      <form [formGroup]="form" novalidate (submit)="submit(form.value)">
+  
+        <mat-card-content>
+  
+          <div class="row margin-top-10">
+  
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <app-input label="Nome" type="text" [control]="form.controls.name">
+              </app-input>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <div class="row justify-content-between">
+          <div class="col-auto">
+            <button mat-flat-button type="button" (click)="back()">
+              <mat-icon>arrow_back</mat-icon>
+              &nbsp;Voltar
+            </button>
+          </div>
+          <div class="col-auto">
+            <button mat-flat-button class="button textButtons" type="submit">
+              Salvar&nbsp;
+              <mat-icon>save</mat-icon>
+            </button>
+          </div>
+        </div>
+  
+      </form>
+  
+    </mat-card>
+  </div>
+  

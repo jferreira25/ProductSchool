@@ -1,0 +1,11 @@
+<mat-nav-list>
+
+  <ng-container *ngFor="let item of data">
+    <a *ngIf="!item.hidden" href="javascript:void(0)" mat-list-item (click)="chooseOption(item, $event)">
+      <mat-icon>{{ item.icon }}</mat-icon>
+      <span mat-line>{{ item.title }}</span>
+      <span mat-line>{{ item.description }}</span>
+    </a>
+  </ng-container>
+
+</mat-nav-list>

@@ -1,0 +1,16 @@
+<div class="width-100">
+  <mat-form-field appearance="outline" class="width-100">
+    <mat-label>&nbsp;{{ label }}</mat-label>
+    <input type="text" matInput [placeholder]="label" [formControl]="control" [matAutocomplete]="autoGroup">
+    <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="getOptionText.bind(this)">
+      <mat-option *ngFor="let selectItem of selectItemsFilter | async" [value]="selectItem" >
+        {{ selectItem[labelName] }}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="control.invalid">
+      <div *ngFor="let error of getErrors()">
+        {{ error }}
+      </div>
+    </mat-error>
+  </mat-form-field>
+</div>

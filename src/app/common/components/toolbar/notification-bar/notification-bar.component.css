@@ -1,0 +1,13 @@
+.mat-menu-panel {
+  max-width: none !important;
+}
+
+.icon-open-notification {
+  font-size: 15px;
+  align-self: baseline;
+  padding-left: 8px;
+}
+
+.notification{
+  color:white;
+}

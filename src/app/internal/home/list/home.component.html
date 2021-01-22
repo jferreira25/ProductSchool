@@ -1,0 +1,19 @@
+<div class="d-flex align-content-stretch flex-wrap">
+
+  <div *ngFor="let box of boxes" class="col-sm-12 col-md-4 col-lg-3">
+
+    <a *ngIf="canShowBox(box)" class="docs-component-category-list-item" href="javascript:void(0)"
+      (click)="goTo(box.path)">
+      <mat-card class="mat-card">
+        <mat-card-title class="mat-card-title">
+          {{ box.title }}
+        </mat-card-title>
+        <mat-card-content class="mat-card-content">
+          {{ box.description }}
+        </mat-card-content>
+      </mat-card>
+    </a>
+
+  </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div>
+  <p class="dialog-title">Atenção</p>
+  <p class="dialog-subtitle">{{ title }}</p>
+</div>
+
+<mat-dialog-content class="mat-typography">
+
+  <mat-list>
+    <h3 mat-subheader>Detalhes</h3>
+    <mat-list-item *ngFor="let msg of messages">
+      <h4 mat-line>- {{ msg }}</h4>
+    </mat-list-item>
+  </mat-list>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" (click)="close()">Ok</button>
+</mat-dialog-actions>

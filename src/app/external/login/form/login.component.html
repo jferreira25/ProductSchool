@@ -1,0 +1,53 @@
+<div class="display-box">
+
+  <div class="hide-mobile no-padding col-md-8 col-lg-9">
+    <div class="height-100 image-background">
+
+    </div>
+
+  </div>
+
+  <div class="no-padding col-md-4 col-lg-3">
+    <div class="simple-card">
+
+      <div class="logo">
+        <img class="logo" src="assets/images/jac-logo.png">
+        <br />
+      </div>
+
+      <form class="padding-top" [formGroup]="form" novalidate (submit)="login(form.value)">
+
+        <mat-card-subtitle>Entre com sua conta</mat-card-subtitle>
+
+        <mat-card-content>
+
+          <div class="row margin-top-10">
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <app-input label="Usuário" type="text" [control]="form.controls.username">
+              </app-input>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <app-input label="Senha" type="password" [control]="form.controls.password">
+              </app-input>
+            </div>
+
+          </div>
+        </mat-card-content>
+
+        <div class="row">
+          <div class="col-12">
+            <button mat-raised-button color="primary" type="submit" class="btn-login">
+              Entrar&nbsp;
+              <mat-icon>send</mat-icon>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
